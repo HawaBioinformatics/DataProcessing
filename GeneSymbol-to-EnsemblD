@@ -1,0 +1,18 @@
+BiocManager::install("biomaRt")
+require('biomaRt')
+
+mart <- useMart('ENSEMBL_MART_ENSEMBL')
+mart <- useDataset('hsapiens_gene_ensembl', mart)
+
+annotLookup <- getBM(
+  mart = mart,
+  attributes = c(
+    'hgnc_symbol',
+    'ensembl_gene_id',
+    'gene_biotype'),
+  uniqueRows = TRUE)
+
+head(annotLookup)
+
+tail(annotLookup)
+tail(subset(annotLookup, hgnc_symbol != ''))
