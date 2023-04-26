@@ -1,18 +1,13 @@
-BiocManager::install("biomaRt")
-require('biomaRt')
-
-mart <- useMart('ENSEMBL_MART_ENSEMBL')
-mart <- useDataset('hsapiens_gene_ensembl', mart)
-
-annotLookup <- getBM(
-  mart = mart,
-  attributes = c(
-    'hgnc_symbol',
-    'ensembl_gene_id',
-    'gene_biotype'),
-  uniqueRows = TRUE)
-
-head(annotLookup)
-
-tail(annotLookup)
-tail(subset(annotLookup, hgnc_symbol != ''))
+# %% 
+import pandas as pd
+df1 = pd.read_csv(r'/Users/hawacoulibaly/Documents/TIME COURSE/Data/il6_clusters_logFC.csv', index_col=0)
+df2 = pd.read_csv(r'/Users/hawacoulibaly/Documents/TIME COURSE/Data/ifn_clusters_logFC.csv', index_col=0)
+# %%
+dfx = pd.read_csv(r'/Users/hawacoulibaly/Documents/TIME COURSE/Data/Gene_List_EMBL.csv', index_col=0)
+# %%
+dfJoined1 = df1.join(dfx)
+dfJoined2 = df2.join(dfx)
+# %%
+dfJoined1.to_csv('IL6_Ensembl.csv')
+dfJoined2.to_csv('IFN_Ensembl.csv')
+# %%
