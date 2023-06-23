@@ -1,0 +1,10 @@
+# %%
+import pandas as pd
+
+df1 = pd.read_csv(r'/Users/hawacoulibaly/Documents/Macrophage RNA Seq/M1andM2 marker list.csv',index_col=0)
+df2 = pd.read_csv(r'/Users/hawacoulibaly/Documents/Macrophage RNA Seq/All_conditions_all_genes.csv',index_col=0)
+# %%
+df = pd.merge(df1, df2, left_index=True, right_index=True)
+# %%
+df.to_csv('/Users/hawacoulibaly/Documents/Macrophage RNA Seq/M1andM2_Idep.csv')
+# %%
